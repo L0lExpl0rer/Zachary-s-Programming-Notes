@@ -23,6 +23,4 @@ public class PhoneQueryController {
     public Result<String> queryPhoneDetails(String phone, String country) {
         return null;
     }
-
-
 }

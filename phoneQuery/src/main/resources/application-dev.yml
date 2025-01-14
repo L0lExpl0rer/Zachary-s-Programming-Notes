@@ -3,7 +3,7 @@ zachary:
     host: 127.0.0.1
     port: 6379
     password: 123456
-    database: 0
+    database: 2
     timeout: 5000 # 限制Redis客户端等待响应的最长时间。如果超过这个时间还没有收到服务器的响应，会抛出超时异常
     lettuce:
       pool:
