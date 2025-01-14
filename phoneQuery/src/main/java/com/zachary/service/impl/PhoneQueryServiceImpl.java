@@ -1,6 +1,7 @@
 package com.zachary.service.impl;
 
 import com.zachary.constant.CacheConstant;
+import com.zachary.constant.MessageConstant;
 import com.zachary.service.PhoneQueryService;
 import com.zachary.utils.PhoneUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,15 @@ public class PhoneQueryServiceImpl implements PhoneQueryService {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
+    @Autowired
+    private PhoneQueryService phoneQueryService;
+
     @Override
     public String getPhoneLocation(String phone, String country) {
+        if (!phoneQueryService.isValid(phone, country)) {
+            return MessageConstant.INVALID_PHONE;
+        }
+
         String redisKey = CacheConstant.REDIS_KEY_PREFIX + "location:" + country + ":" + phone;
         // 在缓存中查询
         String cacheValue = redisTemplate.opsForValue().get(redisKey);
@@ -30,6 +38,10 @@ public class PhoneQueryServiceImpl implements PhoneQueryService {
 
     @Override
     public String getPhoneOperator(String phone, String country) {
+        if (!phoneQueryService.isValid(phone, country)) {
+            return MessageConstant.INVALID_PHONE;
+        }
+
         String redisKey = CacheConstant.REDIS_KEY_PREFIX + "operator:" + country + ":" + phone;
         // 在缓存中查询
         String cacheValue = redisTemplate.opsForValue().get(redisKey);
@@ -45,6 +57,10 @@ public class PhoneQueryServiceImpl implements PhoneQueryService {
 
     @Override
     public String getPhoneOperator(String head) {
+        if (head.length() <3 || !head.substring(0,3).matches("\\d{3}")) {
+            return MessageConstant.INVALID_PHONE;
+        }
+
         String redisKey = CacheConstant.REDIS_KEY_PREFIX + "operator:head" + head;
         // 在缓存中查询
         String cacheValue = redisTemplate.opsForValue().get(redisKey);
@@ -60,6 +76,10 @@ public class PhoneQueryServiceImpl implements PhoneQueryService {
 
     @Override
     public String getPhoneDetails(String phone, String country) {
+        if (!phoneQueryService.isValid(phone, country)) {
+            return MessageConstant.INVALID_PHONE;
+        }
+
         String redisKey = CacheConstant.REDIS_KEY_PREFIX + "details:" + country + ":" + phone;
         // 在缓存中查询
         String cacheValue = redisTemplate.opsForValue().get(redisKey);
