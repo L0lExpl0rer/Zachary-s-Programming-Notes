@@ -1,0 +1,46 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.3'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.zachary'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter' // 核心依赖
+    implementation 'org.springframework.boot:spring-boot-starter-web' // web 依赖
+    compileOnly 'org.projectlombok:lombok' // Lombok
+    annotationProcessor 'org.projectlombok:lombok' // Lombok 注解处理器
+    testImplementation 'org.springframework.boot:spring-boot-starter-test' // 测试依赖
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher' // JUnit启动器
+    implementation 'com.fasterxml.jackson.core:jackson-databind' // json
+
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.12.48'
+    implementation 'com.googlecode.libphonenumber:geocoder:2.76'
+    implementation 'com.googlecode.libphonenumber:carrier:1.66'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:unchecked"
+}
