@@ -4,7 +4,7 @@ spring:
     port: ${zachary.redis.port}
     password: ${zachary.redis.password}
     database: ${zachary.redis.database}
-    connect-timeout: ${zachary.redis.timeout}
+    timeout: ${zachary.redis.timeout}
     lettuce:
       pool:
         max-active: ${zachary.redis.lettuce.pool.max-active}
