@@ -35,12 +35,9 @@ dependencies {
     implementation 'com.googlecode.libphonenumber:libphonenumber:8.12.48'
     implementation 'com.googlecode.libphonenumber:geocoder:2.76'
     implementation 'com.googlecode.libphonenumber:carrier:1.66'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis' // redis
 }
 
 tasks.named('test') {
     useJUnitPlatform()
-}
-
-tasks.withType(JavaCompile) {
-    options.compilerArgs << "-Xlint:unchecked"
 }
