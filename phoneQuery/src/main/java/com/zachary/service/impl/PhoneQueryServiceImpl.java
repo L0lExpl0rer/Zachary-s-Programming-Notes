@@ -5,6 +5,7 @@ import com.zachary.constant.MessageConstant;
 import com.zachary.service.PhoneQueryService;
 import com.zachary.utils.PhoneUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ public class PhoneQueryServiceImpl implements PhoneQueryService {
     private RedisTemplate<String, String> redisTemplate;
 
     @Autowired
+    @Lazy
     private PhoneQueryService phoneQueryService;
 
     @Override

@@ -13,3 +13,5 @@ spring:
         max-idle: ${zachary.redis.lettuce.pool.max-idle}
         min-idle: ${zachary.redis.lettuce.pool.min-idle}
 
+server:
+  port: 8082
